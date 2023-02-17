@@ -5,8 +5,8 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import './styles.css';
 
 type FormValues = {
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     email: string;
     leaveType: string;
     fromTime: string;
@@ -21,16 +21,26 @@ type FormValues = {
 function App() {
  
   const { register, handleSubmit, control } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = data => fetch("http://localhost:8008/leave-form", { method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+    first_name: 1,
+    last_name: 2,
+    email: 3,
+    leaveType: 4,
+    fromTime: 5,
+    toTime: 6,
+    supervisor: 7,
+    fromDate: Date,
+    toDate: Date,
+   }) });
 
   
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
-      <label htmlFor="firstName">First Name</label>
-      <input placeholder="mike" {...register("firstName")} />
+      <label htmlFor="first_name">First Name</label>
+      <input placeholder="mike" {...register("first_name")} />
 
-      <label htmlFor="lastName">Last Name</label>
-      <input placeholder="test" {...register("lastName")} />
+      <label htmlFor="last_name">Last Name</label>
+      <input placeholder="test" {...register("last_name")} />
 
       <label htmlFor="email">Email</label>
       <input
@@ -110,6 +120,8 @@ function App() {
     </form>
   );
 }
+
+
 
 
 
